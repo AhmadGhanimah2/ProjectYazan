@@ -48,15 +48,10 @@
 
                                         <div class="col-auto">
                                             <h4 class="card-title">End Date</h4>
-                                            <input type="date" name="end_date" id="date" class="form-control"  >
+                                            <input type="date" name="end_date" id="date" class="form-control" style="margin-bottom: 10px" >
                                         </div>
-
-                                        <br>
-                                        <br>
-                                        <br>
-                                        <br>
                                         <div class="col-12">
-                                            <button type="submit" class="btn btn-primary mb-2">Create </button>
+                                            <button type="submit" class="btn btn-primary">Create </button>
                                         </div>
                                     </div>
                                 </form>
