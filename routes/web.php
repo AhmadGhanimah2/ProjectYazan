@@ -1,19 +1,25 @@
 <?php
 
+use App\Http\Controllers\HomeController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CreateCardController;
 
 //////////if make login go to dashboard directory////////
 Auth::routes();
 Route::group(['middleware' => ['guest']], function () {
-    Route::get('/',[\App\Http\Controllers\HomeController::class,'index'])->name('login');
+    Route::get('/',[HomeController::class,'index'])->name('login');
 });
 
-Route::group(['prefix' => 'dashboard','middleware' => 'auth'], function (){
+Route::group(['middleware' => 'auth','prefix' => 'dashboard'], function (){
     Route::get('/', function () {
         return view('dashboard.index');
     });
+    Route::group(['prefix' => 'admin'], function (){
+        Route::get('create-card',[CreateCardController::class,'index'])->name('admin.create-card');
+        Route::post('create-card-save',[CreateCardController::class,'store'])->name('admin.create-card.save');
+    });
+
 });
-Route::group(['prefix' => 'admin'], function (){
-    Route::get('create-card',[CreateCardController::class,'index'])->name('admin.create-card');
-});
+Route::get('/',[\App\Http\Controllers\HomeController::class,'index']);
+

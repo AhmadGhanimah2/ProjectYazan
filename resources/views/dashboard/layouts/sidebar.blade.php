@@ -15,9 +15,9 @@
                     <li><a href="index-3.html">Dashboard 3</a></li>
                 </ul>
             </li>
-            <li><a class="ai-icon" href="event-management.html" aria-expanded="false">
+            <li><a class="ai-icon" href="{{route('admin.create-card')}}" aria-expanded="false">
                     <i class="la la-calendar"></i>
-                    <span class="nav-text">Event Management</span>
+                    <span class="nav-text" >Create Card</span>
                 </a>
             </li>
             <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
@@ -97,7 +97,7 @@
             </li>
             <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
                     <i class="la la-dollar"></i>
-                    <span class="nav-text">Fees</span>
+                    <span class="nav-text">test</span>
                 </a>
                 <ul aria-expanded="false">
                     <li><a href="fees-collection.html">Fees Collection</a></li>
