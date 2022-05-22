@@ -9,16 +9,15 @@
                     <i class="la la-home"></i>
                     <span class="nav-text">Dashboard</span>
                 </a>
-                <ul aria-expanded="false">
-                    <li><a href="index.html">Dashboard 1</a></li>
-                    <li><a href="index-2.html">Dashboard 2</a></li>
-                    <li><a href="index-3.html">Dashboard 3</a></li>
-                </ul>
             </li>
-            <li><a class="ai-icon" href="{{route('admin.create-card')}}" aria-expanded="false">
-                    <i class="la la-calendar"></i>
-                    <span class="nav-text" >Create Card</span>
+            <li><a class="has-arrow" href="#" aria-expanded="false">
+                    <i class="la la-user"></i>
+                    <span class="nav-text" href="{{route('admin.create-card')}}">Cards</span>
                 </a>
+                <ul aria-expanded="false">
+                    <li><a href="{{route('admin.create-card')}}">Create Card</a></li>
+                    <li><a href="{{route('admin.create-card.show')}}">Show/Edit/Delete All Cards</a></li>
+                </ul>
             </li>
             <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
                     <i class="la la-user"></i>

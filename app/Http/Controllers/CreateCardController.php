@@ -16,7 +16,8 @@ class CreateCardController extends Controller
      */
     public function index()
     {
-        return view('dashboard.Create-card');
+        $card = CreateCard::latest()->paginate(4);
+        return view('dashboard.Create-card',compact('card'));
     }
 
     /**
@@ -26,7 +27,8 @@ class CreateCardController extends Controller
      */
     public function create()
     {
-        //
+        $card = CreateCard::latest()->paginate(4);
+        return view('dashboard.show-card',compact('card'));
     }
 
     /**
@@ -65,8 +67,9 @@ class CreateCardController extends Controller
             $card ->password =$request->password;
             $card ->phone =$request->phone;
             $card ->start_date =$request->start_date;
-            //
             //dd($request ->start_date);
+
+            //// to +years to date (1years , 2years same the value get request)
             $date_s = Carbon::createFromFormat('Y-m-d', $request->start_date);
                $date_new=$date_s->addYears($request->end_date);
                 $card->end_date=$date_new;
@@ -93,7 +96,7 @@ class CreateCardController extends Controller
 
         }
 
-        catch (\Exception $e){
+        catch (\Exception $e){////////Yazan Exception ?
             return redirect()->back()->withErrors(['error'=>$e->getMessage()]);
         }
         return redirect()->back();
