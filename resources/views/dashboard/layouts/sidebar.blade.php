@@ -12,11 +12,12 @@
             </li>
             <li><a class="has-arrow" href="#" aria-expanded="false">
                     <i class="la la-user"></i>
-                    <span class="nav-text" href="{{route('admin.create-card')}}">Cards</span>
+                    <span class="nav-text">Cards</span>
+
                 </a>
                 <ul aria-expanded="false">
-                    <li><a href="{{route('admin.create-card')}}">Create Card</a></li>
-                    <li><a href="{{route('admin.create-card.show')}}">Show/Edit/Delete All Cards</a></li>
+                    <li><a href="{{route('admin.create-card.show')}}">All cards</a></li>
+
                 </ul>
             </li>
             <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">

@@ -16,8 +16,8 @@ class CreateCardController extends Controller
      */
     public function index()
     {
-        $card = CreateCard::latest()->paginate(4);
-        return view('dashboard.Create-card',compact('card'));
+        $card = CreateCard::all();
+        return view('dashboard.show-card',compact('card'));
     }
 
     /**
@@ -27,8 +27,7 @@ class CreateCardController extends Controller
      */
     public function create()
     {
-        $card = CreateCard::latest()->paginate(4);
-        return view('dashboard.show-card',compact('card'));
+        //
     }
 
     /**
@@ -113,7 +112,7 @@ class CreateCardController extends Controller
      */
     public function show(CreateCard $createCard)
     {
-        //
+        return view('dashboard.Create-card');
     }
 
     /**
