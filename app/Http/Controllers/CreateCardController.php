@@ -42,7 +42,7 @@ class CreateCardController extends Controller
            'email'=>'required|email',
            'password'=>'required|min:1 |max:100', ///////Yazan يجب ان لا يتجاوز 10 حروف_ 1- كيف بدي استدعيها لترجمه 2- //////
            'start_date'=>'required',
-            'phone' => 'required|regex:/(07)[0-9]{10}/',
+            'phone' => 'required|regex:/[0-9]{10}/',
            'end_date'=>'required|in:1,2,3', /////////That is required 1,2,3
         ],
         [
@@ -50,7 +50,7 @@ class CreateCardController extends Controller
             'email.required'=>'يرجى ادخال البريد الالكتروني  ',
             'password.required'=>'يرجى ادخال كلمه المرور  ',
             'phone.required'=>'يرجى ادخال الهاتف  ',
-            'phone.regex'=>'يرجى ادخال asfas  ',
+            'phone.regex'=>'يجب ان يبدآ الرقم ب (07)  ',
             'email.unique'=>'البريد الالكتروني الذي ادخلته مسجل مسبقا',
             'phone.unique'=>'رقم الهاتف الذي ادخلته مسجل مسبقا',
             'password.min'=>'لا يقل اقل من 1 احرف ',
@@ -58,7 +58,8 @@ class CreateCardController extends Controller
 
         ]);
         //to save data ---> database
-        try {$card=new CreateCard();
+        try {
+            $card=new CreateCard();
             $card ->name =$request->name;
             $card ->email =$request->email;
             $card ->password =$request->password;
@@ -88,9 +89,6 @@ class CreateCardController extends Controller
 //        $newDateTime = $currentDateTime->addYears(5);
 //        $card->end_date=$newDateTime;
 //
-
-
-
             $card->save();
 
         }
