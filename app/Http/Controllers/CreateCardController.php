@@ -14,9 +14,11 @@ class CreateCardController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    ///// index -> to show all data //////
     public function index()
     {
-        $card = CreateCard::all();
+
+        $card = CreateCard::latest()->paginate();
         return view('dashboard.show-card',compact('card'));
     }
 
@@ -25,6 +27,8 @@ class CreateCardController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    //just for going to page added
     public function create()
     {
         //
@@ -36,28 +40,29 @@ class CreateCardController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+    // for get the request database
     public function store(Request $request)
     {
         $request->validate([
-           'name'=>'required',
-           'email'=>'required|email',
-           'password'=>'required|min:1 |max:100', ///////Yazan يجب ان لا يتجاوز 10 حروف_ 1- كيف بدي استدعيها لترجمه 2- //////
-           'start_date'=>'required',
+            'name'=>'required',
+            'email'=>'required|email',
+            'password'=>'required|min:1 |max:100', ///////Yazan يجب ان لا يتجاوز 10 حروف_ 1- كيف بدي استدعيها لترجمه 2- //////
+            'start_date'=>'required',
             'phone' => 'required|regex:/[0-9]{10}/',
-           'end_date'=>'required|in:1,2,3', /////////That is required 1,2,3
+            'end_date'=>'required|in:1,2,3', /////////That is required 1,2,3
         ],
-        [
-            'name.required'=>'يرجى ادخال الاسم  ',
-            'email.required'=>'يرجى ادخال البريد الالكتروني  ',
-            'password.required'=>'يرجى ادخال كلمه المرور  ',
-            'phone.required'=>'يرجى ادخال الهاتف  ',
-            'phone.regex'=>'يجب ان يبدآ الرقم ب (07)  ',
-            'email.unique'=>'البريد الالكتروني الذي ادخلته مسجل مسبقا',
-            'phone.unique'=>'رقم الهاتف الذي ادخلته مسجل مسبقا',
-            'password.min'=>'لا يقل اقل من 1 احرف ',
-            'password.max'=>'لا يزيد عن 20 احرف ',
+            [
+                'name.required'=>'يرجى ادخال الاسم  ',
+                'email.required'=>'يرجى ادخال البريد الالكتروني  ',
+                'password.required'=>'يرجى ادخال كلمه المرور  ',
+                'phone.required'=>'يرجى ادخال الهاتف  ',
+                'phone.regex'=>'يجب ان يبدآ الرقم ب (07)  ',
+                'email.unique'=>'البريد الالكتروني الذي ادخلته مسجل مسبقا',
+                'phone.unique'=>'رقم الهاتف الذي ادخلته مسجل مسبقا',
+                'password.min'=>'لا يقل اقل من 1 احرف ',
+                'password.max'=>'لا يزيد عن 20 احرف ',
 
-        ]);
+            ]);
         //to save data ---> database
         try {
             $card=new CreateCard();
@@ -68,10 +73,10 @@ class CreateCardController extends Controller
             $card ->start_date =$request->start_date;
             //dd($request ->start_date);
 
-            //// to +years to date (1years , 2years same the value get request)
+            //// to add  +years to date (1years , 2years same the value get request)
             $date_s = Carbon::createFromFormat('Y-m-d', $request->start_date);
-               $date_new=$date_s->addYears($request->end_date);
-                $card->end_date=$date_new;
+            $date_new=$date_s->addYears($request->end_date);
+            $card->end_date=$date_new;
 
 //            if($request->end_date=='1'){
 //                $date_new=$date_s->addYear(1);
@@ -95,7 +100,7 @@ class CreateCardController extends Controller
 
         }
 
-        catch (\Exception $e){////////Yazan Exception ?
+        catch (\Exception $e){//////// Yazan Exception ?????
             return redirect()->back()->withErrors(['error'=>$e->getMessage()]);
         }
         return redirect()->back();
@@ -133,6 +138,8 @@ class CreateCardController extends Controller
      * @param  \App\Models\CreateCard  $createCard
      * @return \Illuminate\Http\Response
      */
+
+    //// same the store function to update
     public function update(Request $request, CreateCard $createCard)
     {
         //
@@ -144,6 +151,7 @@ class CreateCardController extends Controller
      * @param  \App\Models\CreateCard  $createCard
      * @return \Illuminate\Http\Response
      */
+    /// to delete items
     public function destroy(CreateCard $createCard)
     {
         //

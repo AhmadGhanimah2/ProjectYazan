@@ -5,10 +5,18 @@
     <!--**********************************
             Content body start
         ***********************************-->
+    <div class="container">
+        @if ($message = Session::get('success'))
+            <div class="alert alert-primary" role="alert">
+                {{$message}}
+            </div>
+        @endif
+
+    </div>
     <div class="content-body">
         <div class="container-fluid">
             <table class="table table-striped">
-                <a href="{{route('admin.create-card')}}" class="btn btn-primary float-right" > Create Cards</a>
+                <a href="{{route('admin.create-card')}}" class="btn btn-primary " > Create Cards</a>
                 <thead>
                 <tr>
                     <th scope="col">id</th>

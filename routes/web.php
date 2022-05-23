@@ -4,7 +4,7 @@ use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CreateCardController;
-
+/// formate widnows
 //////////if make login go to dashboard directory////////
 Auth::routes();
 Route::group(['middleware' => ['guest']], function () {
