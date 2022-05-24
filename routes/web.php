@@ -19,6 +19,8 @@ Route::group(['middleware' => 'auth','prefix' => 'dashboard'], function (){
         Route::get('create-card',[CreateCardController::class,'show'])->name('admin.create-card');
         Route::post('create-card-save',[CreateCardController::class,'store'])->name('admin.create-card.save');
         Route::get('show-card',[CreateCardController::class,'index'])->name('admin.create-card.show');
+        Route::post('delete-card',[CreateCardController::class,'destroy'])->name('admin.delete-card.delete');
+        Route::post('update-card',[CreateCardController::class,'update'])->name('admin.update-card.update');
     });
 
 });

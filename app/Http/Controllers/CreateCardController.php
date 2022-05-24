@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\CreateCard;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Hash;
 
 
 class CreateCardController extends Controller
@@ -103,7 +104,7 @@ class CreateCardController extends Controller
         catch (\Exception $e){//////// Yazan Exception ?????
             return redirect()->back()->withErrors(['error'=>$e->getMessage()]);
         }
-        return redirect()->back();
+        return redirect(route('admin.create-card.show'));
 
 
     }
@@ -140,10 +141,55 @@ class CreateCardController extends Controller
      */
 
     //// same the store function to update
-    public function update(Request $request, CreateCard $createCard)
+    public function update(Request $request)
     {
-        //
+        $update_cards=CreateCard::findOrfail($request->id_update);
+        {
+            $update_cards ->name =$request->name;
+            $update_cards ->email =$request->email;
+            if($request->password =! ""){
+                $update_cards ->password =Hash::make($request->password);
+            }else{
+
+            }
+
+            $update_cards ->phone =$request->phone;
+            $update_cards ->start_date =$request->start_date;
+            //dd($request ->start_date);
+
+            //// to add  +years to date (1years , 2years same the value get request)
+            $date_s = Carbon::createFromFormat('Y-m-d', $request->start_date);
+            $date_new=$date_s->addYears($request->end_date);
+            $update_cards->end_date=$date_new;
+
+//            if($request->end_date=='1'){
+//                $date_new=$date_s->addYear(1);
+//                $card->end_date=$date_new;
+//
+//            }
+//            elseif ($request->end_date=='2') {
+//                $date_new = $date_s->addYears(2);
+//                $card->end_date=$date_new;
+//            }
+//            else{
+//                $request->end_date=='3';
+//                $date_new=$date_s->addYears(3);
+//                $card->end_date=$date_new;
+//            }
+//        $currentDateTime=$request->start_date;
+//        $newDateTime = $currentDateTime->addYears(5);
+//        $card->end_date=$newDateTime;
+//
+            $update_cards->update();
+        }
+        return back();
+
+
+
+
     }
+
+
 
     /**
      * Remove the specified resource from storage.
@@ -152,8 +198,10 @@ class CreateCardController extends Controller
      * @return \Illuminate\Http\Response
      */
     /// to delete items
-    public function destroy(CreateCard $createCard)
+    public function destroy(Request $request)
     {
-        //
+        CreateCard::destroy($request->id);
+        return back();
+
     }
 }
