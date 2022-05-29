@@ -71,6 +71,7 @@ class CreateCardController extends Controller
             $card ->email =$request->email;
             $card ->password =$request->password;
             $card ->phone =$request->phone;
+            $card ->year =$request->end_date;
             $card ->start_date =$request->start_date;
             //dd($request ->start_date);
 
@@ -142,17 +143,17 @@ class CreateCardController extends Controller
 
     //// same the store function to update
     public function update(Request $request)
+        ////that for insert + update
     {
         $update_cards=CreateCard::findOrfail($request->id_update);
         {
+
             $update_cards ->name =$request->name;
             $update_cards ->email =$request->email;
+            $update_cards ->end_date =$request->end_date;
             if($request->password =! ""){
                 $update_cards ->password =Hash::make($request->password);
-            }else{
-
             }
-
             $update_cards ->phone =$request->phone;
             $update_cards ->start_date =$request->start_date;
             //dd($request ->start_date);
@@ -160,7 +161,9 @@ class CreateCardController extends Controller
             //// to add  +years to date (1years , 2years same the value get request)
             $date_s = Carbon::createFromFormat('Y-m-d', $request->start_date);
             $date_new=$date_s->addYears($request->end_date);
-            $update_cards->end_date=$date_new;
+            $update_cards->end_date=$request->end_date;
+
+
 
 //            if($request->end_date=='1'){
 //                $date_new=$date_s->addYear(1);
@@ -180,7 +183,7 @@ class CreateCardController extends Controller
 //        $newDateTime = $currentDateTime->addYears(5);
 //        $card->end_date=$newDateTime;
 //
-            $update_cards->update();
+            $update_cards->save();
         }
         return back();
 
@@ -191,12 +194,7 @@ class CreateCardController extends Controller
 
 
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\CreateCard  $createCard
-     * @return \Illuminate\Http\Response
-     */
+
     /// to delete items
     public function destroy(Request $request)
     {

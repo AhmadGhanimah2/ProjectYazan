@@ -64,11 +64,9 @@
                                 <form action="{{route('admin.delete-card.delete')}}" method="post">
 
                                     @csrf
-
-
                                 <div class="modal-body">
                                     <input type="hidden" value="{{$cards->id}}" name="id">
-                                   هل انت متاكد من عمليه الحذف ؟ 1-1
+                                   هل انت متاكد من عمليه الحذف ؟
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -91,10 +89,7 @@
                                 </div>
 
                                 <form action="{{route('admin.update-card.update')}}" method="post">
-
                                     @csrf
-
-
                                     <div class="modal-body">
                                         <input type="hidden" value="{{$cards->id}}" name="id_update">
                                         <div class="row">
@@ -119,15 +114,15 @@
                                                 <input class="form-control" type="text" name="start_date" value="{{$cards->start_date}}">
                                             </div>
                                             <div class="col-lg-6 mb-3">
-                                                <label class="form-check-label" >End date</label>
+                                                <label class="form-check-label"  >End date</label>
                                                 <select name="end_date" class="form-control">
-                                                    <option value="1">
+                                                    <option value="1" {{ ($cards->year=="1")? "checked" : "" }}>
                                                         1 Years
                                                     </option>
-                                                    <option value="2">
+                                                    <option value="2" {{ ($cards->year=="2")? "checked" : "" }}>
                                                         2 Years
                                                     </option>
-                                                    <option value="3">
+                                                    <option value="3"{{ ($cards->year=="3")? "checked" : "" }}>
                                                         3 Years
                                                     </option>
                                                 </select>

@@ -20,7 +20,8 @@ class CreateCreateCardsTable extends Migration
             $table->string('password');
             $table->string('phone');
             $table->date('start_date');
-            $table->date('end_date');
+            $table->string('end_date');
+            $table->string('year');
             $table->softDeletes();
             $table->timestamps();
         });
