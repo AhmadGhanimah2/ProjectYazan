@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\image;
 use App\Models\CreateCard;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
+
 
 
 class CreateCardController extends Controller
@@ -18,7 +21,6 @@ class CreateCardController extends Controller
     ///// index -> to show all data //////
     public function index()
     {
-
         $card = CreateCard::latest()->paginate();
         return view('dashboard.show-card',compact('card'));
     }
@@ -80,6 +82,19 @@ class CreateCardController extends Controller
             $date_new=$date_s->addYears($request->end_date);
             $card->end_date=$date_new;
 
+            $card->save();
+
+            if ($request->hasFile('img')){
+                $name=$request->img;
+                $name= $name->getClientOriginalName();    ///// that for name imgaes
+                $request->file('img')->store('','upload_attachments'); /* disk in config/filesystem */
+
+                $image= new image();
+                $image->image_path=$name;
+                $image->card_id=$card->id;
+                $image->save();
+            }
+
 //            if($request->end_date=='1'){
 //                $date_new=$date_s->addYear(1);
 //                $card->end_date=$date_new;
@@ -98,10 +113,8 @@ class CreateCardController extends Controller
 //        $newDateTime = $currentDateTime->addYears(5);
 //        $card->end_date=$newDateTime;
 //
-            $card->save();
 
         }
-
         catch (\Exception $e){//////// Yazan Exception ?????
             return redirect()->back()->withErrors(['error'=>$e->getMessage()]);
         }
@@ -147,6 +160,9 @@ class CreateCardController extends Controller
     {
         $update_cards=CreateCard::findOrfail($request->id_update);
         {
+            $request->validate([
+                'end_date'=>'required',
+            ]);
 
             $update_cards ->name =$request->name;
             $update_cards ->email =$request->email;
@@ -157,13 +173,11 @@ class CreateCardController extends Controller
             $update_cards ->phone =$request->phone;
             $update_cards ->start_date =$request->start_date;
             //dd($request ->start_date);
-
             //// to add  +years to date (1years , 2years same the value get request)
             $date_s = Carbon::createFromFormat('Y-m-d', $request->start_date);
             $date_new=$date_s->addYears($request->end_date);
-            $update_cards->end_date=$request->end_date;
-
-
+            $update_cards->end_date=$date_new;
+            $update_cards->year=$request->end_date;
 
 //            if($request->end_date=='1'){
 //                $date_new=$date_s->addYear(1);
@@ -183,18 +197,11 @@ class CreateCardController extends Controller
 //        $newDateTime = $currentDateTime->addYears(5);
 //        $card->end_date=$newDateTime;
 //
-            $update_cards->save();
+            $update_cards->update();
         }
         return back();
 
-
-
-
     }
-
-
-
-
     /// to delete items
     public function destroy(Request $request)
     {

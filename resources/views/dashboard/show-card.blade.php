@@ -115,7 +115,7 @@
                                             </div>
                                             <div class="col-lg-6 mb-3">
                                                 <label class="form-check-label"  >End date</label>
-                                                <select name="end_date" class="form-control">
+                                                <select name="end_date" class="form-control" id="sel1">
                                                     <option value="1" {{ ($cards->year=="1")? "checked" : "" }}>
                                                         1 Years
                                                     </option>
@@ -127,6 +127,7 @@
                                                     </option>
                                                 </select>
                                             </div>
+
                                         </div>
                                     </div>
                                     <div class="modal-footer">

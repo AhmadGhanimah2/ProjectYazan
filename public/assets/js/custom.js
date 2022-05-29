@@ -27,14 +27,14 @@ var Edumin = function(){
 			}
 		});
 	}
-	
+
 	// All Checked
 	var handleAllChecked = function() {
 		$("#checkAll").change(function() {
 			$("td input:checkbox").prop('checked', $(this).prop("checked"));
 		});
 	}
-	
+
 	// Navigation
 	var handleNavigation = function() {
 		$(".nav-control").on('click', function() {
@@ -44,29 +44,29 @@ var Edumin = function(){
 			$(".hamburger").toggleClass("is-active");
 		});
 	}
-	
+
 	// Current Active
 	var handleCurrentActive = function() {
 		for (var nk = window.location,
 			o = $("ul#menu a").filter(function() {
-				
+
 				return this.href == nk;
-				
+
 			})
 			.addClass("mm-active")
 			.parent()
-			.addClass("mm-active");;) 
+			.addClass("mm-active");;)
 		{
-			
+
 			if (!o.is("li")) break;
-			
+
 			o = o.parent()
 				.addClass("mm-show")
 				.parent()
 				.addClass("mm-active");
 		}
 	}
-	
+
 	// Mini Sidebar
 	var handleMiniSidebar = function() {
 		$("ul#menu>li").on('click', function() {
@@ -77,7 +77,7 @@ var Edumin = function(){
 			}
 		})
 	}
-	
+
 	// Min Height
 	var handleMinHeight = function() {
 		var win_h = window.outerHeight;
@@ -86,7 +86,7 @@ var Edumin = function(){
 			$(".content-body").css("min-height", (win_h + 60) + "px");
 		};
 	}
-	
+
 	// Data Action
 	var handleDataAction = function() {
 		$('a[data-action="collapse"]').on("click", function(i) {
@@ -115,7 +115,7 @@ var Edumin = function(){
 				}, 2000)
 		});
 	}
-	
+
 	// Header Hight
 	var handleHeaderHight = function() {
 		const headerHight = $('.header').innerHeight();
@@ -137,7 +137,7 @@ var Edumin = function(){
             ps.isRtl = false;
 		})
 	}
-	
+
 	// btn Number
 	var handleBtnNumber = function() {
 		$('.btn-number').on('click', function(e) {
@@ -157,17 +157,17 @@ var Edumin = function(){
 			}
 		});
 	}
-	
+
 	// Perfect Scrollbar
 	var handlePerfectScrollbar = function() {
 		if(jQuery('.dlabnav-scroll').length > 0)
 		{
 			const qs = new PerfectScrollbar('.dlabnav-scroll');
-			
+
 			qs.isRtl = false;
 		}
 	}
-	
+
 	// Show Pass
 	var handleshowPass = function(){
 		jQuery('.show-pass').on('click',function(){
@@ -179,8 +179,8 @@ var Edumin = function(){
 			}
 		});
 	}
-	
-	
+
+
 	/* Function ============ */
 	return {
 		init:function(){
@@ -199,42 +199,42 @@ var Edumin = function(){
 		},
 
 		load:function(){
-			
+
 		},
-		
+
 		resize:function(){
-			
+
 		},
 	}
-	
+
 }();
 
 
-/* Document.ready Start */	
+/* Document.ready Start */
 jQuery(document).ready(function() {
-	
+
 	$('[data-toggle="popover"]').popover();
-	
+
 	Edumin.init();
-	
+
 });
 /* Document.ready END */
 
 /* Window Load START */
 jQuery(window).on('load',function () {
-	'use strict'; 
-	
+	'use strict';
+
 	$('#preloader').fadeOut(500);
     $('#main-wrapper').addClass('show');
 	$('select').selectpicker();
-	
+
 	Edumin.load();
-	
+
 });
 /*  Window Load END */
 /* Window Resize START */
 jQuery(window).on('resize',function () {
-	'use strict'; 
+	'use strict';
 	Edumin.resize();
 });
 /*  Window Resize END */

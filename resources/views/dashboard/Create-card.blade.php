@@ -12,7 +12,7 @@
 
                 <!-- row -->
                 <div class="row">
-                    <form action="{{route('admin.create-card.save')}}" method="post">
+                    <form action="{{route('admin.create-card.save')}}" method="post" enctype="multipart/form-data">
                         @csrf
                     <div class="card">
                         <div class="card-header">
@@ -94,6 +94,10 @@
                                                     3 Years
                                                 </option>
                                             </select>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <label class="form-check-label" >image</label>
+                                            <input class="form-control" type="file" name="img">
                                         </div>
 
 
