@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\Hash;
 
 
 class CreateCardController extends Controller
+
+////// ->of al object //////=> of al arrays
 {
     /**
      * Display a listing of the resource.
@@ -19,8 +21,9 @@ class CreateCardController extends Controller
     ///// index -> to show all data //////
     public function index()
     {
-        $card = CreateCard::latest()->paginate();
+        $card = CreateCard::all();
         return view('dashboard.show-card',compact('card'));
+///////// [ [ 0 ] => [ ] ]
     }
 
     /**
@@ -83,14 +86,19 @@ class CreateCardController extends Controller
             $card->save();
 
             if ($request->hasFile('img')){
-                $name=$request->img;
-                $name= $name->getClientOriginalName();    ///// that for name imgaes
-                $request->file('img')->store('','upload_attachments'); /* disk in config/filesystem */
+                $name= $request->img ->getClientOriginalName();    ///// that for name imgaes
 
-                $image= new image();
-                $image->image_path=$name;
-                $image->card_id=$card->id;
-                $image->save();
+                $request->file('img')->storeAs('',$name,'upload_attachments'); /* disk in config/filesystem */
+
+                image::create([
+                    'image_path'=>$name,
+                    'card_id'=>$card->id,
+                ]);
+
+//                $image= new image();
+//                $image->image_path=$name;
+//                $image->card_id=$card->id;
+//                $image->save();
             }
 
 //            if($request->end_date=='1'){

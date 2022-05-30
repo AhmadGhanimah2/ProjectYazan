@@ -32,6 +32,10 @@
                 @foreach($card as $cards)
                     <tr>
                         <td>{{$cards->id}}</td>
+                        @foreach($cards ->Images as $image)
+                            <td><img src="{{URL::asset('images/image')}}/{{$image->image_path}}" height="60"></td>
+                        @endforeach
+
                         <td>{{$cards->name}}</td>
                         <td>{{$cards->email}}</td>
                         <td>{{$cards->phone}}</td>

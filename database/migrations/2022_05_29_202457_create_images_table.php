@@ -17,8 +17,8 @@ class CreateImagesTable extends Migration
             $table->id();
             $table->string('image_path');
             $table->bigInteger('card_id')->unsigned();
+            ///////////////////relation same name = biginteger
             $table->foreign('card_id')->references('id')->on('create_cards')->cascadeOnDelete();
-
             $table->timestamps();
         });
     }
