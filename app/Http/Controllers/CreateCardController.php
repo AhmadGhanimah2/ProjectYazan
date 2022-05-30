@@ -2,13 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\image;
 use App\Models\CreateCard;
-use Illuminate\Http\Request;
+use App\Models\image;
 use Carbon\Carbon;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Storage;
-
 
 
 class CreateCardController extends Controller
