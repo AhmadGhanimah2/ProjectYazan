@@ -35,7 +35,7 @@
                         @foreach($cards ->Images as $image)
                             <td><img src="{{URL::asset('images/image')}}/{{$image->image_path}}" height="60"></td>
                         @endforeach
-                       <td> <a href="{{route('profile')}}">{{$cards->name}} </a></td>
+                       <td> <a href="{{route('admin.profile.edit',$cards->id)}}">{{$cards->name}} </a></td>
                         <td>{{$cards->email}}</td>
                         <td>{{$cards->phone}}</td>
                         <td>{{$cards->start_date}}</td>

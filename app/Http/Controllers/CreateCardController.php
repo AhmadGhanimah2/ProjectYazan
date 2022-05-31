@@ -147,9 +147,11 @@ class CreateCardController extends Controller
      * @param  \App\Models\CreateCard  $createCard
      * @return \Illuminate\Http\Response
      */
-    public function edit(CreateCard $createCard)
+    public function edit(CreateCard $createCard,$id)
     {
-        //
+
+        $card = CreateCard::findOrfail($id);
+        return view('dashboard.profile',compact('card'));
     }
 
     /**
